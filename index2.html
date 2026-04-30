@@ -1,0 +1,95 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despierta PR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .menu-item {
+            cursor: pointer;
+            background-color: #2c7a2c;
+            color: white;
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .menu-item:hover {
+            background-color: #1e5e1e;
+        }
+
+        .topics {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .topic-item {
+            cursor: pointer;
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: #2c7a2c;
+            font-weight: bold;
+        }
+
+        .topic-item:hover {
+            background-color: #c8e6c9;
+        }
+
+        .topic-content {
+            display: none;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #2c7a2c;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Despierta PR</h1>
+
+    <!-- Historia Menu Item -->
+    <div class="menu-item" onclick="toggleTopics('historia-topics')">
+        📖 Historia
+    </div>
+
+    <div class="topics" id="historia-topics">
+
+        <!-- Topic: Antes de 1493 -->
+        <div class="topic-item" onclick="toggleContent('antes-1493')">
+            Antes de 1493
+        </div>
+        <div class="topic-content" id="antes-1493">
+            <h3>Antes de 1493</h3>
+            <p>Antes de la llegada de Colón, Puerto Rico estaba habitada por el pueblo Taíno, un grupo indígena de la cultura Arawak. Los Taínos llamaban a la isla <strong>Boriken</strong> o Borikén, de donde viene la palabra "Boricua".</p>
+            <p>Vivían en aldeas lideradas por jefes llamados <strong>caciques</strong>. Pescaban, cultivaban yuca, maíz y batatas, y cazaban. Construían casas redondas llamadas <strong>bohíos</strong> y tenían una rica vida espiritual con dioses llamados <strong>zemís</strong>. También jugaban un juego de pelota ceremonial llamado <strong>batey</strong>.</p>
+            <p>Tristemente, la población Taína fue casi exterminada en pocas décadas tras la llegada de los españoles debido a enfermedades, trabajos forzados y violencia. Sin embargo, su cultura y ADN sobreviven hoy en el pueblo puertorriqueño, la comida, el idioma y los nombres de lugares.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleTopics(id) {
+            const topics = document.getElementById(id);
+            topics.style.display = topics.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>
