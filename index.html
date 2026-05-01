@@ -294,6 +294,12 @@
       border-color: var(--ocean);
       transform: translateY(-6px);
     }
+
+    /* Historia card is clickable */
+    .topic-card.historia-card {
+      cursor: pointer;
+    }
+
     .topic-icon { font-size: 2.5rem; margin-bottom: 1rem; }
     .topic-card h3 {
       font-family: 'Playfair Display', serif;
@@ -306,6 +312,73 @@
       line-height: 1.7;
       color: rgba(255,255,255,0.55);
       font-weight: 300;
+    }
+
+    /* ── HISTORIA ACCORDION ── */
+    .historia-expand {
+      display: none;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1rem;
+    }
+    .historia-expand.open { display: block; }
+
+    .historia-topic-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(244,196,48,0.08);
+      border: 1px solid rgba(244,196,48,0.2);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--sun);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+    .historia-topic-btn:hover {
+      background: rgba(244,196,48,0.15);
+    }
+    .historia-topic-btn .arrow {
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+    }
+    .historia-topic-btn.active .arrow {
+      transform: rotate(90deg);
+    }
+
+    .historia-content {
+      display: none;
+      background: rgba(0,0,0,0.25);
+      border-left: 3px solid var(--sun);
+      border-radius: 0 8px 8px 0;
+      padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+    }
+    .historia-content.open { display: block; }
+    .historia-content h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--sand);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .historia-content p { margin-bottom: 0.75rem; }
+    .historia-content p:last-child { margin-bottom: 0; }
+
+    /* expand hint */
+    .expand-hint {
+      font-size: 0.75rem;
+      color: rgba(244,196,48,0.6);
+      margin-top: 0.5rem;
+      font-style: italic;
     }
 
     /* ── CULTURE STRIP ── */
@@ -481,11 +554,33 @@
   <p class="section-label">Lo que cubrimos</p>
   <h2 style="color:var(--white);">Temas que importan</h2>
   <div class="topics-grid">
-    <div class="topic-card">
+
+    <!-- HISTORIA CARD — clickable with accordion -->
+    <div class="topic-card historia-card" onclick="toggleHistoria()">
       <div class="topic-icon">🏛️</div>
       <h3>Historia</h3>
       <p>Desde el pueblo taíno hasta la modernidad. Las raíces de nuestra identidad contadas con profundidad y respeto.</p>
+      <p class="expand-hint">▼ Haz clic para explorar temas</p>
+
+      <!-- Topic list — shown when Historia is clicked -->
+      <div class="historia-expand" id="historia-expand">
+
+        <!-- Topic: Antes de 1493 -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'antes-1493')">
+          Antes de 1493 <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="antes-1493">
+          <h4>Antes de 1493 — El Pueblo Taíno</h4>
+          <p>Antes de la llegada de Colón, Puerto Rico estaba habitada por el pueblo <strong>Taíno</strong>, un grupo indígena de la cultura Arawak. Los Taínos llamaban a la isla <strong>Boriken</strong> o Borikén, de donde viene la palabra "Boricua".</p>
+          <p>Vivían en aldeas lideradas por jefes llamados <strong>caciques</strong>. Pescaban, cultivaban yuca, maíz y batatas, y cazaban. Construían casas redondas llamadas <strong>bohíos</strong> y tenían una rica vida espiritual con dioses llamados <strong>zemís</strong>. También jugaban un juego de pelota ceremonial llamado <strong>batey</strong>.</p>
+          <p>Tristemente, la población Taína fue casi exterminada en pocas décadas tras la llegada de los españoles debido a enfermedades, trabajos forzados y violencia. Sin embargo, su cultura y ADN sobreviven hoy en el pueblo puertorriqueño, la comida, el idioma y los nombres de lugares.</p>
+        </div>
+
+        <!-- Add more topics here in the future -->
+
+      </div>
     </div>
+
     <div class="topic-card">
       <div class="topic-icon">🎵</div>
       <h3>Música & Arte</h3>
@@ -563,6 +658,21 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Toggle Historia topic list
+  function toggleHistoria() {
+    const expand = document.getElementById('historia-expand');
+    expand.classList.toggle('open');
+  }
+
+  // Toggle individual topic content
+  function toggleHistoriaTopic(event, id) {
+    event.stopPropagation(); // prevent card click from firing
+    const content = document.getElementById(id);
+    const btn = event.currentTarget;
+    content.classList.toggle('open');
+    btn.classList.toggle('active');
+  }
 </script>
 
 </body>
