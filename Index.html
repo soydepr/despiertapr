@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Despierta Puerto Rico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sun: #F4C430;
+      --ocean: #006994;
+      --deep: #003D57;
+      --sand: #F5E6C8;
+      --green: #2D6A4F;
+      --red: #C1121F;
+      --white: #FDFAF4;
+      --dark: #0D1B2A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, #006994aa 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, #F4C43033 0%, transparent 60%),
+        linear-gradient(160deg, #0D1B2A 0%, #003D57 50%, #0D1B2A 100%);
+      z-index: 0;
+    }
+
+    /* animated sun */
+    .sun {
+      position: absolute;
+      bottom: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #FFE066, #F4C430 50%, #E07B00);
+      box-shadow: 0 0 120px 60px #F4C43055, 0 0 300px 100px #F4C43022;
+      animation: pulse 6s ease-in-out infinite;
+      z-index: 1;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 120px 60px #F4C43055, 0 0 300px 100px #F4C43022; }
+      50%       { box-shadow: 0 0 160px 80px #F4C43077, 0 0 400px 140px #F4C43033; }
+    }
+
+    /* ocean waves */
+    .waves {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      z-index: 2;
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: -100%;
+      width: 300%;
+      height: 100%;
+    }
+    .wave svg { width: 100%; height: 100%; }
+    .wave1 { animation: wave 8s linear infinite; opacity: 0.6; }
+    .wave2 { animation: wave 11s linear infinite reverse; opacity: 0.4; bottom: 10px; }
+    .wave3 { animation: wave 14s linear infinite; opacity: 0.3; bottom: 20px; }
+    @keyframes wave {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(33.33%); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 10;
+      animation: fadeUp 1.2s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.4em;
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      color: var(--sun);
+      margin-bottom: 1rem;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      line-height: 0.9;
+      color: var(--white);
+      text-shadow: 0 4px 40px #00000066;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+    h1 span { color: var(--sun); font-style: italic; }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      color: var(--sand);
+      margin-top: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+
+    .btn {
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary {
+      background: var(--sun);
+      color: var(--dark);
+      box-shadow: 0 4px 30px #F4C43066;
+    }
+    .btn-primary:hover { box-shadow: 0 8px 40px #F4C43099; }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline:hover { border-color: var(--white); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: rgba(13,27,42,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--sun);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--sand);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sun); }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 6vw, 6rem);
+    }
+
+    .section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.35em;
+      font-size: 0.8rem;
+      color: var(--sun);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--white);
+      color: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .about { grid-template-columns: 1fr; gap: 3rem; } }
+
+    .about-text p {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #334;
+      font-weight: 300;
+    }
+    .about-text h2 { color: var(--dark); }
+
+    .about-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .island-card {
+      background: linear-gradient(135deg, var(--ocean), var(--deep));
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 20px 60px rgba(0,105,148,0.3);
+      width: 100%;
+      max-width: 340px;
+    }
+    .island-card .flag {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+    .island-stat {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      text-align: center;
+    }
+    .island-stat .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--sun);
+    }
+    .island-stat .lbl {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── TOPICS ── */
+    .topics { background: var(--dark); }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .topic-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: background 0.3s, transform 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+    .topic-card:hover {
+      background: rgba(0,105,148,0.25);
+      border-color: var(--ocean);
+      transform: translateY(-6px);
+    }
+
+    /* Historia card is clickable */
+    .topic-card.historia-card {
+      cursor: pointer;
+    }
+
+    .topic-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .topic-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+    .topic-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+    }
+
+    /* ── HISTORIA ACCORDION ── */
+    .historia-expand {
+      display: none;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1rem;
+    }
+    .historia-expand.open { display: block; }
+
+    .historia-topic-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(244,196,48,0.08);
+      border: 1px solid rgba(244,196,48,0.2);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--sun);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+    .historia-topic-btn:hover {
+      background: rgba(244,196,48,0.15);
+    }
+    .historia-topic-btn .arrow {
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+    }
+    .historia-topic-btn.active .arrow {
+      transform: rotate(90deg);
+    }
+
+    .historia-content {
+      display: none;
+      background: rgba(0,0,0,0.25);
+      border-left: 3px solid var(--sun);
+      border-radius: 0 8px 8px 0;
+      padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+    }
+    .historia-content.open { display: block; }
+    .historia-content h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--sand);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .historia-content p { margin-bottom: 0.75rem; }
+    .historia-content p:last-child { margin-bottom: 0; }
+
+    /* expand hint */
+    .expand-hint {
+      font-size: 0.75rem;
+      color: rgba(244,196,48,0.6);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* ── CULTURE STRIP ── */
+    .culture {
+      background: var(--green);
+      color: var(--white);
+      text-align: center;
+    }
+    .culture-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 2.5rem);
+      font-style: italic;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    .culture-attr {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights { background: #0a1520; }
+    .highlights h2 { color: var(--white); margin-bottom: 3rem; }
+    .highlight-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    @media (max-width: 700px) { .highlight-row { grid-template-columns: 1fr; } }
+    .highlight-item {
+      background: #0a1520;
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+    }
+    .highlight-item:hover { background: rgba(244,196,48,0.07); }
+    .h-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--sun);
+      line-height: 1;
+    }
+    .h-label {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+    .h-desc {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── CALL TO ACTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--ocean) 0%, var(--deep) 100%);
+      text-align: center;
+    }
+    .cta-section h2 { color: var(--white); margin-bottom: 1rem; }
+    .cta-section p { color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060e16;
+      padding: 3rem clamp(1.5rem, 6vw, 6rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--sun);
+      letter-spacing: 0.08em;
+    }
+    .footer-copy { color: rgba(255,255,255,0.35); font-size: 0.85rem; }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Despierta PR</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#temas">Temas</a></li>
+    <li><a href="#cultura">Cultura</a></li>
+    <li><a href="#unete">Únete</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="sun"></div>
+
+  <div class="waves">
+    <div class="wave wave1">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="#006994" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="wave wave2">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,80 C400,20 800,100 1200,40 L1200,120 L0,120 Z" fill="#003D57" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="wave wave3">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,40 C200,100 700,10 1200,70 L1200,120 L0,120 Z" fill="#0D1B2A" opacity="0.8"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="eyebrow">✦ Bienvenidos a la Isla del Encanto ✦</p>
+    <h1>Des<span>pierta</span><br>Puerto Rico</h1>
+    <p class="hero-sub">Historia, cultura, resistencia y orgullo boricua. Un espacio para conocer y celebrar nuestra isla.</p>
+    <div class="hero-cta">
+      <a href="#sobre" class="btn btn-primary">Explorar</a>
+      <a href="#unete" class="btn btn-outline">Únete</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about reveal" id="sobre">
+  <div class="about-text">
+    <p class="section-label">¿Quiénes somos?</p>
+    <h2>La voz de nuestra isla</h2>
+    <p>Despierta Puerto Rico es un espacio dedicado a amplificar la historia, la cultura y las voces del pueblo boricua. Creemos que conocer nuestra raíz es el primer paso hacia un futuro más fuerte.</p>
+    <p>Desde las montañas de la Cordillera Central hasta las playas de Rincón, esta isla late con una identidad única que merece ser contada — sin filtros.</p>
+    <div style="margin-top:2rem;">
+      <a href="#temas" class="btn btn-primary" style="background:var(--ocean); color:white; box-shadow: 0 4px 20px #00699440;">Ver temas</a>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="island-card">
+      <div class="flag">🇵🇷</div>
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem;">La Isla del Encanto</h3>
+      <p style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:0.5rem;">Borinquen, Puerto Rico</p>
+      <div class="island-stat">
+        <div><div class="num">3.2M</div><div class="lbl">Habitantes</div></div>
+        <div><div class="num">78</div><div class="lbl">Municipios</div></div>
+        <div><div class="num">500+</div><div class="lbl">Años de historia</div></div>
+        <div><div class="num">9,104</div><div class="lbl">km² de belleza</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section class="topics reveal" id="temas">
+  <p class="section-label">Lo que cubrimos</p>
+  <h2 style="color:var(--white);">Temas que importan</h2>
+  <div class="topics-grid">
+
+    <!-- HISTORIA CARD — clickable with accordion -->
+    <div class="topic-card historia-card" onclick="toggleHistoria()">
+      <div class="topic-icon">🏛️</div>
+      <h3>Historia</h3>
+      <p>Desde el pueblo taíno hasta la modernidad. Las raíces de nuestra identidad contadas con profundidad y respeto.</p>
+      <p class="expand-hint">▼ Haz clic para explorar temas</p>
+
+      <!-- Topic list — shown when Historia is clicked -->
+      <div class="historia-expand" id="historia-expand">
+
+        <!-- Topic: Antes de 1493 -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'antes-1493')">
+          Antes de 1493 <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="antes-1493">
+          <h4>Antes de 1493 — El Pueblo Taíno</h4>
+          <p>Antes de la llegada de Colón, Puerto Rico estaba habitada por el pueblo <strong>Taíno</strong>, un grupo indígena de la cultura Arawak. Los Taínos llamaban a la isla <strong>Boriken</strong> o Borikén, de donde viene la palabra "Boricua".</p>
+          <p>Vivían en aldeas lideradas por jefes llamados <strong>caciques</strong>. Pescaban, cultivaban yuca, maíz y batatas, y cazaban. Construían casas redondas llamadas <strong>bohíos</strong> y tenían una rica vida espiritual con dioses llamados <strong>zemís</strong>. También jugaban un juego de pelota ceremonial llamado <strong>batey</strong>.</p>
+          <p>Tristemente, la población Taína fue casi exterminada en pocas décadas tras la llegada de los españoles debido a enfermedades, trabajos forzados y violencia. Sin embargo, su cultura y ADN sobreviven hoy en el pueblo puertorriqueño, la comida, el idioma y los nombres de lugares.</p>
+        </div>
+
+        <!-- Topic: España -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'espana')">
+          España: 1493 – 1898 <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="espana">
+          <h4>El Dominio Español: 1493 – 1898</h4>
+          <p>Tras la llegada de Cristóbal Colón en 1493, España reclamó la isla y comenzó su colonización formal en 1508 bajo el mando de <strong>Juan Ponce de León</strong>, quien se convirtió en el primer gobernador de Puerto Rico.</p>
+          <p>Durante los primeros años de la colonia, los españoles sometieron a los Taínos mediante el sistema de <strong>encomienda</strong>, forzándolos a trabajar en las minas de oro. El agotamiento de las minas, combinado con enfermedades y violencia, llevó al colapso de la población indígena. España entonces comenzó a importar esclavos africanos para mantener la economía de la isla.</p>
+          <p>Puerto Rico se convirtió en un punto estratégico clave para el Imperio Español en el Caribe. Se construyeron grandes fortalezas como <strong>El Morro</strong> y <strong>San Cristóbal</strong> en San Juan para defender la isla de ataques ingleses, holandeses y franceses.</p>
+          <p>Con el tiempo, surgió una identidad puertorriqueña propia — mezcla de raíces Taínas, africanas y españolas. En el siglo XIX creció un movimiento por la autonomía y la abolición de la esclavitud, que se logró en <strong>1873</strong>. En 1897, España concedió la <strong>Carta Autonómica</strong>, dándole a Puerto Rico un gobierno propio — pero duró poco.</p>
+          <p>En 1898, como resultado de la <strong>Guerra Hispanoamericana</strong>, España cedió Puerto Rico a los Estados Unidos mediante el Tratado de París, poniendo fin a casi 400 años de dominio español.</p>
+        </div>
+
+        <!-- Topic: Jones Act -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'jones-act')">
+          El Jones Act: 1898 – 1948 <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="jones-act">
+          <h4>La Americanización de Puerto Rico: 1898 – 1948</h4>
+          <p>Tras el Tratado de París de 1898, Puerto Rico pasó a manos de los Estados Unidos. Desde el primer momento, el gobierno americano impuso una serie de medidas para transformar la isla a su imagen — un proceso de <strong>americanización forzada</strong> que afectó la cultura, el idioma y la identidad boricua.</p>
+          <p>Las escuelas fueron obligadas a enseñar en <strong>inglés</strong>, reemplazando el español como idioma de instrucción. Se impusieron maestros americanos, libros de texto estadounidenses y una narrativa que minimizaba la historia y cultura puertorriqueña. El objetivo era claro: convertir al puertorriqueño en americano.</p>
+          <p>En 1917, el Congreso de los Estados Unidos aprobó la <strong>Ley Jones-Shafroth</strong>, conocida como el Jones Act. Esta ley otorgó la ciudadanía americana a los puertorriqueños — pero no por generosidad. Llegó justo antes de la entrada de EE.UU. a la Primera Guerra Mundial, lo que permitió reclutar a miles de jóvenes boricuas para el ejército americano.</p>
+          <p>El Jones Act también estableció un gobierno civil en la isla, pero mantuvo el control del Congreso sobre Puerto Rico. Los puertorriqueños podían ser ciudadanos americanos, pero no tenían representación con voto en el Congreso ni podían votar por el presidente.</p>
+          <p>Otro Jones Act — el <strong>Merchant Marine Act de 1920</strong> — obligó a Puerto Rico a usar únicamente barcos de fabricación y bandera americana para importar y exportar bienes, encareciendo enormemente el costo de vida en la isla. Este segundo Jones Act sigue vigente hoy y es considerado uno de los mayores obstáculos económicos de Puerto Rico.</p>
+        </div>
+
+        <!-- Topic: Luis Muñoz Marín -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'munoz-marin')">
+          Luis Muñoz Marín: 1948 <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="munoz-marin">
+          <h4>Luis Muñoz Marín y el Nacimiento del Estado Libre Asociado</h4>
+          <p>En 1948, <strong>Luis Muñoz Marín</strong> se convirtió en el primer gobernador de Puerto Rico elegido directamente por el pueblo — un momento histórico que marcó el fin de medio siglo de gobernadores impuestos por Washington. Su elección representó un paso importante hacia la autodeterminación boricua.</p>
+          <p>Muñoz Marín fue el fundador del <strong>Partido Popular Democrático (PPD)</strong> y arquitecto de la política económica conocida como <strong>"Operación Manos a la Obra"</strong> (Operation Bootstrap). Este plan buscó industrializar Puerto Rico atrayendo fábricas americanas con exenciones de impuestos, transformando la economía de agrícola a manufacturera.</p>
+          <p>En 1952, bajo su liderato, Puerto Rico adoptó su propia <strong>Constitución</strong> y se convirtió en <strong>Estado Libre Asociado</strong> de los Estados Unidos. Muñoz Marín promovió este estatus como una solución intermedia — ni independencia ni estadidad — que daría a Puerto Rico autonomía interna mientras mantenía lazos con EE.UU.</p>
+          <p>Sin embargo, su legado es complejo. Muñoz Marín también apoyó políticas de control de población que llevaron a la <strong>esterilización forzada</strong> de miles de mujeres puertorriqueñas, una de las páginas más oscuras de la historia moderna de la isla. Además, su gobierno reprimió el movimiento independentista, incluyendo el encarcelamiento del líder nacionalista <strong>Pedro Albizu Campos</strong>.</p>
+          <p>Muñoz Marín gobernó hasta 1964 y es considerado el padre del Puerto Rico moderno — una figura de grandes logros pero también de contradicciones profundas que el pueblo boricua sigue evaluando hoy.</p>
+        </div>
+
+        <!-- Add more topics here in the future -->
+
+      </div>
+    </div>
+
+    <div class="topic-card historia-card" onclick="toggleMusica()">
+      <div class="topic-icon">🎵</div>
+      <h3>Música & Arte</h3>
+      <p>Salsa, plena, bomba, reggaetón — Puerto Rico ha regalado su alma al mundo a través de sus artistas.</p>
+      <p class="expand-hint">▼ Haz clic para explorar temas</p>
+
+      <div class="historia-expand" id="musica-expand">
+
+        <!-- Topic: Salsa -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'salsa')">
+          La Salsa <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="salsa">
+          <h4>La Salsa — El Ritmo del Alma Boricua</h4>
+          <p>La salsa nació en las calles del Bronx, Nueva York, en los años 60 y 70, creada en gran parte por <strong>inmigrantes puertorriqueños y cubanos</strong> que mezclaron el son cubano con jazz, bomba y plena. Pero fue Puerto Rico quien la perfeccionó y la convirtió en su ritmo más emblemático.</p>
+          <p>Puerto Rico desarrolló su propio estilo — más suave y romántico — distinto de la salsa colombiana o neoyorquina. La isla se convirtió en la capital mundial de la <strong>salsa romántica</strong> en los años 80, un movimiento que conquistó el mundo con letras de amor y melodías suaves.</p>
+          <p>Entre los grandes de la salsa puertorriqueña destacan <strong>Héctor Lavoe</strong>, "El Cantante de los Cantantes"; <strong>Willie Colón</strong>, nacido en Nueva York de padres boricuas; <strong>Gilberto Santa Rosa</strong>, "El Caballero de la Salsa"; <strong>Victor Manuelle</strong>, <strong>Jerry Rivera</strong>, y <strong>Marc Anthony</strong>, quien llevó la salsa a una nueva generación mundial.</p>
+          <p>La salsa no es solo música — es identidad, resistencia y orgullo. Cada clave, cada trompeta y cada grito de "¡Wepa!" es un pedazo del alma boricua que viaja por el mundo.</p>
+        </div>
+
+        <!-- Add more Música topics here in the future -->
+
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🌿</div>
+      <h3>Naturaleza</h3>
+      <p>El Yunque, las playas bioluminiscentes, los manglares. Un ecosistema único que debemos proteger.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">✊</div>
+      <h3>Resistencia</h3>
+      <p>El pueblo boricua ha resistido y se ha levantado una y otra vez. Conoce las luchas que nos definen.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🍽️</div>
+      <h3>Gastronomía</h3>
+      <p>Mofongo, lechón, pasteles — la cocina puertorriqueña es una fiesta de sabores con historia en cada plato.</p>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🤝</div>
+      <h3>Comunidad</h3>
+      <p>Historias de boricuas construyendo, conectando y elevando su gente dentro y fuera de la isla.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURE QUOTE -->
+<section class="culture reveal" id="cultura">
+  <p class="culture-quote">"Soy Boricua, pa' que tú lo sepas."</p>
+  <p class="culture-attr">— Orgullo de un pueblo que no se rinde</p>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights reveal">
+  <p class="section-label">Puerto Rico en números</p>
+  <h2>La isla que sorprende</h2>
+  <div class="highlight-row">
+    <div class="highlight-item">
+      <div class="h-num">28,000</div>
+      <div class="h-label">AÑOS DE HISTORIA TAÍNA</div>
+      <div class="h-desc">Los primeros habitantes de Borinquen dejaron una huella cultural que vive hasta hoy en el lenguaje y las tradiciones.</div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-num">1</div>
+      <div class="h-label">BOSQUE TROPICAL FEDERAL EN EE.UU.</div>
+      <div class="h-desc">El Bosque Nacional El Yunque — el único bosque tropical lluvioso dentro del sistema forestal de los Estados Unidos.</div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-num">#1</div>
+      <div class="h-label">EN RUM EXPORTADO AL MUNDO</div>
+      <div class="h-desc">Puerto Rico produce más del 70% del ron consumido en los Estados Unidos y exporta a decenas de países.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="unete">
+  <p class="section-label">Únete al movimiento</p>
+  <h2>¿Listo para despertar?</h2>
+  <p>Comparte tu historia, aprende de tu herencia y sé parte de la conversación que eleva a Puerto Rico.</p>
+  <a href="#" class="btn btn-primary" style="font-size:1rem; padding: 1rem 2.5rem;">Comienza aquí →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Despierta Puerto Rico 🇵🇷</div>
+  <p class="footer-copy">Hecho con orgullo boricua · 2026</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Toggle Música topic list
+  function toggleMusica() {
+    const expand = document.getElementById('musica-expand');
+    expand.classList.toggle('open');
+  }
+
+  // Toggle Historia topic list
+  function toggleHistoria() {
+    const expand = document.getElementById('historia-expand');
+    expand.classList.toggle('open');
+  }
+
+  // Toggle individual topic content
+  function toggleHistoriaTopic(event, id) {
+    event.stopPropagation(); // prevent card click from firing
+    const content = document.getElementById(id);
+    const btn = event.currentTarget;
+    content.classList.toggle('open');
+    btn.classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
