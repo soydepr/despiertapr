@@ -550,6 +550,126 @@
       padding: 2rem;
       font-style: italic;
     }
+
+    /* ── EDITORIALES (archivo) ── */
+    .editoriales-section { background: var(--dark); }
+    .editoriales-intro {
+      color: rgba(255,255,255,0.55);
+      max-width: 600px;
+      margin: 1rem 0 3rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .editorial-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .editorial-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--sun);
+      border-radius: 14px;
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .editorial-item:hover { background: rgba(244,196,48,0.06); transform: translateY(-5px); }
+    .editorial-date {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.18em;
+      font-size: 0.75rem;
+      color: rgba(244,196,48,0.75);
+      margin-bottom: 0.75rem;
+    }
+    .editorial-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .editorial-excerpt {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+    }
+    .editorial-readlink { font-size: 0.85rem; font-weight: 500; color: var(--sun); }
+
+    /* ── LECTOR (ventana grande) ── */
+    .reader-overlay {
+      position: fixed; inset: 0;
+      background: rgba(6,14,22,0.92);
+      -webkit-backdrop-filter: blur(7px);
+      backdrop-filter: blur(7px);
+      z-index: 2000;
+      display: none;
+      overflow-y: auto;
+      padding: clamp(1rem, 4vw, 3rem);
+    }
+    .reader-overlay.open { display: block; }
+    .reader-close-btn {
+      position: fixed;
+      top: clamp(1rem, 4vw, 2rem);
+      right: clamp(1rem, 4vw, 2rem);
+      width: 46px; height: 46px;
+      border: none; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+      font-size: 1.7rem; line-height: 1;
+      cursor: pointer; z-index: 2100;
+      transition: background 0.2s;
+    }
+    .reader-close-btn:hover { background: rgba(255,255,255,0.25); }
+    .reader-panel {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      background: #0f1d2b;
+      border: 1px solid rgba(244,196,48,0.22);
+      border-radius: 18px;
+      padding: clamp(1.75rem, 5vw, 4rem);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+    }
+    .reader-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      color: var(--white);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+    .reader-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--sun);
+      font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+      margin-bottom: 1.25rem;
+    }
+    .reader-date {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      color: rgba(244,196,48,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .reader-body p {
+      color: rgba(255,255,255,0.82);
+      font-size: 1.08rem;
+      line-height: 1.9;
+      margin-bottom: 1.4rem;
+    }
+    .reader-body strong { color: var(--white); font-weight: 600; }
+    .reader-body h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--sand);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      margin: 2.5rem 0 1rem;
+    }
   </style>
 </head>
 <body>
@@ -560,6 +680,7 @@
   <ul class="nav-links">
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#temas">Temas</a></li>
+    <li><a href="#editoriales">Editoriales</a></li>
     <li><a href="#cultura">Cultura</a></li>
     <li><a href="#unete">Únete</a></li>
   </ul>
@@ -602,7 +723,7 @@
 <!-- FEATURED EDITORIAL -->
 <section class="featured-editorial reveal" id="editorial-destacada">
   <div class="featured-inner">
-    <span class="tag">★ Editorial Destacada</span>
+    <span class="tag">★ Editorial</span>
     <p class="featured-date">EDITORIAL · 2026</p>
     <h2>Consentimiento Fabricado</h2>
     <p class="dek">Cuatro plebiscitos han favorecido la unión con Estados Unidos. Pero, ¿es una elección libre o el producto previsible de un siglo de dependencia colonial? Un análisis del costo real de la dependencia — y por qué solo la soberanía nos hace dueños de nuestro futuro.</p>
@@ -825,50 +946,6 @@
       </div>
     </div>
 
-    <!-- EDITORIALES CARD — clickable with accordion -->
-    <div class="topic-card historia-card" onclick="toggleEditoriales()">
-      <div class="topic-icon">✍️</div>
-      <h3>Editoriales</h3>
-      <p>Opinión y análisis sobre el presente y el futuro político de Puerto Rico. Ideas para despertar el debate.</p>
-      <p class="expand-hint">▼ Haz clic para explorar editoriales</p>
-
-      <div class="historia-expand" id="editoriales-expand">
-
-        <!-- Editorial: Consentimiento Fabricado -->
-        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'ed-consentimiento')">
-          Consentimiento Fabricado <span class="arrow">▶</span>
-        </button>
-        <div class="historia-content" id="ed-consentimiento">
-          <h4>Consentimiento Fabricado — Por Qué Solo la Independencia Nos Hace Libres</h4>
-          <p style="font-size:0.78rem; color:rgba(244,196,48,0.7); margin-bottom:1rem; letter-spacing:0.05em;">EDITORIAL · 2026</p>
-
-          <p>Durante más de un siglo, el destino político de Puerto Rico ha descansado sobre una sola pregunta incómoda: ¿elige de verdad su pueblo el vínculo con los Estados Unidos, o ha sido condicionado a desearlo? En cuatro plebiscitos consecutivos —2012, 2017, 2020 y de nuevo en 2024, cuando la estadidad alcanzó cerca del <strong>58.6 por ciento</strong> de los votos— los puertorriqueños han señalado una clara preferencia por estrechar los lazos con Washington antes que por la independencia. Para muchos, esto parece un veredicto democrático ya resuelto. Pero una mirada más detenida sugiere que lo que parece una elección libre podría ser, en realidad, el producto previsible de la dependencia colonial.</p>
-          <p>El primer problema es de información. Una elección genuina exige que todas las opciones se comprendan en igualdad de condiciones, y no es así. Generaciones de puertorriqueños han sido educadas, gobernadas y organizadas económicamente bajo la autoridad estadounidense, mientras que la independencia se ha presentado —cuando se presenta— como un salto hacia la pobreza y el aislamiento. Los votantes pueden imaginar con nitidez la vida como parte de los Estados Unidos porque ya viven una versión de ella; no pueden imaginar un Puerto Rico soberano porque ninguna generación viva lo ha experimentado.</p>
-          <p>El segundo problema es la coacción económica, que se disfraza de preferencia. La economía de la isla fue estructurada deliberadamente en torno a la dependencia de las transferencias federales, los mercados estadounidenses y leyes como la <strong>Ley Jones</strong>. Nadie elige libremente la mano que lo alimenta cuando esa misma mano ha pasado un siglo asegurándose de que no pudiera alimentarse de ninguna otra forma. Lo que parece lealtad suele ser apenas el miedo racional a perder beneficios que fueron hechos indispensables a propósito.</p>
-          <p>El tercer problema es la colonización de la identidad misma. La forma más duradera de control imperial no es militar ni económica, sino psicológica: el momento en que el colonizado empieza a ver la condición del colonizador como el techo natural de su propia ambición. Cuando la estadidad se presenta como el único camino hacia la dignidad, la suposición tácita es que esa dignidad solo puede ser otorgada por los Estados Unidos, nunca reclamada por los propios puertorriqueños.</p>
-          <p>Nada de esto es una acusación de estupidez. Los puertorriqueños no son ignorantes; responden con lógica a las condiciones que se les impusieron. El punto es que esas condiciones nunca fueron neutrales.</p>
-
-          <h4>El balance económico</h4>
-          <p>Quienes defienden el arreglo actual reducen todo el debate a una sola cifra: el dinero federal. Y la cifra es real. Para el año fiscal 2026, el presupuesto consolidado de Puerto Rico ronda los <strong>$32.6 mil millones</strong>, de los cuales solo unos <strong>$13 mil millones</strong> corresponden al Fondo General de control local. En el año fiscal 2025, los fondos federales alcanzaron unos <strong>$15.4 mil millones</strong>, cerca del <strong>46 por ciento</strong> del presupuesto del gobierno. Esta es la cifra que se agita como bandera de advertencia: si pierdes la unión, pierdes el dinero.</p>
-          <p>Pero un balance tiene dos columnas, y la de los costos casi nunca se suma. La Ley Jones obliga a la isla a transportar mercancías únicamente en barcos construidos, tripulados y abanderados en los Estados Unidos. Economistas de la Universidad de Purdue estiman que impone una carga de cerca de <strong>$1.4 mil millones</strong> cada año —el equivalente a un arancel del <strong>30.6 por ciento</strong> sobre los bienes que llegan del territorio continental—, de los cuales unos $692 millones recaen directamente sobre los hogares, alrededor de $203 por persona al año. En una isla que importa cerca del <strong>85 por ciento</strong> de sus alimentos y casi toda su energía, ese impuesto oculto produce un costo de vida cerca de un 13 por ciento más alto que el del territorio continental, mientras el ingreso medio de los hogares (unos $24,000) apenas llega a la mitad de la cifra continental. Más del <strong>40 por ciento</strong> vive bajo el nivel de pobreza, y la isla carga con una deuda que supera los <strong>$70 mil millones</strong>, reestructurada bajo una junta de supervisión que los puertorriqueños no eligieron.</p>
-          <p>Imaginemos ahora la otra columna: un Puerto Rico soberano que comercie con el mundo en sus propios términos. Libre de la Ley Jones, la isla podría enviar y recibir mercancías en los barcos más económicos disponibles, como ya lo hacen sus vecinos del Caribe. Fijaría su propio régimen arancelario, negociaría sus propios acuerdos comerciales con la Unión Europea, América Latina y Asia, y controlaría su propia política tributaria —la misma herramienta que la República Dominicana, Singapur e Irlanda usaron para atraer capital global— en vez de dejar que Washington decida qué incentivos pueden ofrecer sus industrias.</p>
-          <p>La honestidad obliga a nombrar la parte difícil: un Puerto Rico soberano perdería buena parte de esos $15.4 mil millones en transferencias directas, y reemplazarlos exigiría una construcción nacional disciplinada. Pero la independencia no tiene por qué significar abandono: el modelo de libre asociación —la relación de EE.UU. con las Islas Marshall, Micronesia y Palaos— permite que naciones soberanas reciban asistencia mientras controlan sus propios asuntos. Un presupuesto que depende de un benefactor no es ingreso, es una mesada, y una mesada puede ser revocada a voluntad por un Congreso que responde a otros pueblos.</p>
-
-          <h4>El espejismo de la estadidad</h4>
-          <p>Hay una razón final por la que el sueño de la unión nunca despertará, y no tiene nada que ver con lo que quieren los puertorriqueños. La estadidad no puede votarse desde la isla; solo puede concederla un acto del <strong>Congreso</strong>, un cuerpo en el que Puerto Rico no tiene un solo miembro con voto. Admitir a Puerto Rico como el estado cincuenta y uno significaría sentar a dos nuevos senadores, cuatro o cinco miembros de la Cámara y un nuevo bloque de votos electorales: suficiente para inclinar el equilibrio del poder nacional. El partido que tema perder esa contienda tiene todos los incentivos para que ese día nunca llegue.</p>
-          <p>La resistencia va más allá del partidismo, hasta la fría aritmética del interés propio. Un estado nuevo no suma poder: lo divide. La cuota de cada estado en el Senado se reduciría de una cincuentava parte a una cincuenta y unava. La Cámara está limitada a <strong>435 miembros</strong> desde 1929, así que los nuevos escaños de Puerto Rico se les quitarían a estados que ya los tienen. La misma dilución se extendería al Colegio Electoral. En otras palabras, admitir a Puerto Rico les pide a cincuenta estados ya establecidos que voten para hacerse individualmente más débiles, y pocos en la historia se han ofrecido a hacerlo.</p>
-          <p>El expediente lo demuestra. Puerto Rico ha votado por la estadidad cuatro veces —2012, 2017, 2020 y 2024— y la respuesta de Washington ha sido el silencio. La Ley de Estatus de Puerto Rico fue aprobada por la Cámara en 2022 y murió en el Senado. No se admite un estado nuevo desde <strong>Hawái en 1959</strong>, hace más de sesenta y cinco años. La estadidad se sostiene en alto como un horizonte —siempre visible, nunca alcanzado—, un espejismo que mantiene a un pueblo colonizado caminando obediente hacia un destino que el mapa fue trazado para negarle. Un futuro que depende del permiso de quienes tienen todas las razones para negarlo no es un futuro: es una correa disfrazada de promesa.</p>
-
-          <h4>Solo la independencia</h4>
-          <p>De todas las opciones puestas ante los puertorriqueños, solo una los convierte en verdaderos dueños de su propio futuro, y esa es la independencia. La estadidad, por más que se vista con el lenguaje de la igualdad, sigue significando aceptar un futuro escrito en Washington. La libre asociación es soberanía con correa. Solo la independencia hace de Puerto Rico el autor de su propio destino.</p>
-          <p>Ser libre es ser responsable de uno mismo: controlar las propias fronteras, la propia moneda, el propio comercio, el propio asiento entre las naciones del mundo. Significa negociar con los Estados Unidos como un igual, en lugar de suplicarles como un dependiente. La independencia no es un salto al vacío; es la simple proposición de que los puertorriqueños, como cualquier otra nación de la tierra, son capaces de gobernarse a sí mismos y tienen derecho a hacerlo. La dignidad del autogobierno no es algo que se le pida a los Estados Unidos. <strong>Es algo que se reclama.</strong></p>
-        </div>
-
-        <!-- Add more Editoriales topics here in the future -->
-
-      </div>
-    </div>
-
     <div class="topic-card">
       <div class="topic-icon">🍽️</div>
       <h3>Gastronomía</h3>
@@ -879,6 +956,27 @@
       <h3>Comunidad</h3>
       <p>Historias de boricuas construyendo, conectando y elevando su gente dentro y fuera de la isla.</p>
     </div>
+  </div>
+</section>
+
+<!-- EDITORIALES (archivo) -->
+<section class="editoriales-section reveal" id="editoriales">
+  <p class="section-label">Opinión</p>
+  <h2 style="color:var(--white);">Editoriales</h2>
+  <p class="editoriales-intro">Análisis y opinión sobre el futuro político de Puerto Rico. Lee nuestras editoriales recientes y pasadas.</p>
+
+  <div class="editorial-list">
+
+    <!-- Editorial item: Consentimiento Fabricado -->
+    <article class="editorial-item" onclick="openEditorial('ed-consentimiento')">
+      <p class="editorial-date">EDITORIAL · 2026</p>
+      <h3>Consentimiento Fabricado</h3>
+      <p class="editorial-excerpt">Cuatro plebiscitos han favorecido la unión con Estados Unidos. ¿Elección libre o el producto previsible de un siglo de dependencia colonial? Por qué solo la soberanía nos hace dueños de nuestro futuro.</p>
+      <span class="editorial-readlink">Leer editorial completa →</span>
+    </article>
+
+    <!-- ▼▼▼ AÑADE NUEVAS EDITORIALES AQUÍ: copia el bloque <article class="editorial-item"> de arriba, cambia el título, la fecha, el resumen y el id de openEditorial() ▼▼▼ -->
+
   </div>
 </section>
 
@@ -956,24 +1054,24 @@
     expand.classList.toggle('open');
   }
 
-  // Toggle Editoriales topic list
-  function toggleEditoriales() {
-    const expand = document.getElementById('editoriales-expand');
-    expand.classList.toggle('open');
-  }
-
-  // Open a specific editorial from the featured section at the top
+  // Open an editorial in the full-screen reader window
   function openEditorial(id) {
-    const list = document.getElementById('editoriales-expand');
-    if (list) list.classList.add('open');
-    const content = document.getElementById(id);
-    if (content) {
-      content.classList.add('open');
-      const btn = content.previousElementSibling;
-      if (btn && btn.classList.contains('historia-topic-btn')) btn.classList.add('active');
-      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.reader-article').forEach(function(a){ a.style.display = 'none'; });
+    var article = document.getElementById(id);
+    if (article) article.style.display = 'block';
+    var overlay = document.getElementById('reader-overlay');
+    if (overlay) {
+      overlay.classList.add('open');
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
     }
   }
+  function closeReader() {
+    var overlay = document.getElementById('reader-overlay');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeReader(); });
 
   // Toggle Música topic list
   function toggleMusica() {
@@ -996,6 +1094,46 @@
     btn.classList.toggle('active');
   }
 </script>
+
+<!-- ════ LECTOR DE EDITORIALES (ventana grande) ════ -->
+<div class="reader-overlay" id="reader-overlay" onclick="if(event.target===this) closeReader()">
+  <button class="reader-close-btn" onclick="closeReader()" aria-label="Cerrar">×</button>
+  <div class="reader-panel">
+
+    <!-- Artículo: Consentimiento Fabricado -->
+    <article class="reader-article" id="ed-consentimiento">
+      <h2 class="reader-title">Consentimiento Fabricado</h2>
+      <p class="reader-sub">Por Qué Solo la Independencia Nos Hace Libres</p>
+      <p class="reader-date">EDITORIAL · 2026</p>
+      <div class="reader-body">
+          <p>Durante más de un siglo, el destino político de Puerto Rico ha descansado sobre una sola pregunta incómoda: ¿elige de verdad su pueblo el vínculo con los Estados Unidos, o ha sido condicionado a desearlo? En cuatro plebiscitos consecutivos —2012, 2017, 2020 y de nuevo en 2024, cuando la estadidad alcanzó cerca del <strong>58.6 por ciento</strong> de los votos— los puertorriqueños han señalado una clara preferencia por estrechar los lazos con Washington antes que por la independencia. Para muchos, esto parece un veredicto democrático ya resuelto. Pero una mirada más detenida sugiere que lo que parece una elección libre podría ser, en realidad, el producto previsible de la dependencia colonial.</p>
+          <p>El primer problema es de información. Una elección genuina exige que todas las opciones se comprendan en igualdad de condiciones, y no es así. Generaciones de puertorriqueños han sido educadas, gobernadas y organizadas económicamente bajo la autoridad estadounidense, mientras que la independencia se ha presentado —cuando se presenta— como un salto hacia la pobreza y el aislamiento. Los votantes pueden imaginar con nitidez la vida como parte de los Estados Unidos porque ya viven una versión de ella; no pueden imaginar un Puerto Rico soberano porque ninguna generación viva lo ha experimentado.</p>
+          <p>El segundo problema es la coacción económica, que se disfraza de preferencia. La economía de la isla fue estructurada deliberadamente en torno a la dependencia de las transferencias federales, los mercados estadounidenses y leyes como la <strong>Ley Jones</strong>. Nadie elige libremente la mano que lo alimenta cuando esa misma mano ha pasado un siglo asegurándose de que no pudiera alimentarse de ninguna otra forma. Lo que parece lealtad suele ser apenas el miedo racional a perder beneficios que fueron hechos indispensables a propósito.</p>
+          <p>El tercer problema es la colonización de la identidad misma. La forma más duradera de control imperial no es militar ni económica, sino psicológica: el momento en que el colonizado empieza a ver la condición del colonizador como el techo natural de su propia ambición. Cuando la estadidad se presenta como el único camino hacia la dignidad, la suposición tácita es que esa dignidad solo puede ser otorgada por los Estados Unidos, nunca reclamada por los propios puertorriqueños.</p>
+          <p>Nada de esto es una acusación de estupidez. Los puertorriqueños no son ignorantes; responden con lógica a las condiciones que se les impusieron. El punto es que esas condiciones nunca fueron neutrales.</p>
+
+          <h3>El balance económico</h3>
+          <p>Quienes defienden el arreglo actual reducen todo el debate a una sola cifra: el dinero federal. Y la cifra es real. Para el año fiscal 2026, el presupuesto consolidado de Puerto Rico ronda los <strong>$32.6 mil millones</strong>, de los cuales solo unos <strong>$13 mil millones</strong> corresponden al Fondo General de control local. En el año fiscal 2025, los fondos federales alcanzaron unos <strong>$15.4 mil millones</strong>, cerca del <strong>46 por ciento</strong> del presupuesto del gobierno. Esta es la cifra que se agita como bandera de advertencia: si pierdes la unión, pierdes el dinero.</p>
+          <p>Pero un balance tiene dos columnas, y la de los costos casi nunca se suma. La Ley Jones obliga a la isla a transportar mercancías únicamente en barcos construidos, tripulados y abanderados en los Estados Unidos. Economistas de la Universidad de Purdue estiman que impone una carga de cerca de <strong>$1.4 mil millones</strong> cada año —el equivalente a un arancel del <strong>30.6 por ciento</strong> sobre los bienes que llegan del territorio continental—, de los cuales unos $692 millones recaen directamente sobre los hogares, alrededor de $203 por persona al año. En una isla que importa cerca del <strong>85 por ciento</strong> de sus alimentos y casi toda su energía, ese impuesto oculto produce un costo de vida cerca de un 13 por ciento más alto que el del territorio continental, mientras el ingreso medio de los hogares (unos $24,000) apenas llega a la mitad de la cifra continental. Más del <strong>40 por ciento</strong> vive bajo el nivel de pobreza, y la isla carga con una deuda que supera los <strong>$70 mil millones</strong>, reestructurada bajo una junta de supervisión que los puertorriqueños no eligieron.</p>
+          <p>Imaginemos ahora la otra columna: un Puerto Rico soberano que comercie con el mundo en sus propios términos. Libre de la Ley Jones, la isla podría enviar y recibir mercancías en los barcos más económicos disponibles, como ya lo hacen sus vecinos del Caribe. Fijaría su propio régimen arancelario, negociaría sus propios acuerdos comerciales con la Unión Europea, América Latina y Asia, y controlaría su propia política tributaria —la misma herramienta que la República Dominicana, Singapur e Irlanda usaron para atraer capital global— en vez de dejar que Washington decida qué incentivos pueden ofrecer sus industrias.</p>
+          <p>La honestidad obliga a nombrar la parte difícil: un Puerto Rico soberano perdería buena parte de esos $15.4 mil millones en transferencias directas, y reemplazarlos exigiría una construcción nacional disciplinada. Pero la independencia no tiene por qué significar abandono: el modelo de libre asociación —la relación de EE.UU. con las Islas Marshall, Micronesia y Palaos— permite que naciones soberanas reciban asistencia mientras controlan sus propios asuntos. Un presupuesto que depende de un benefactor no es ingreso, es una mesada, y una mesada puede ser revocada a voluntad por un Congreso que responde a otros pueblos.</p>
+
+          <h3>El espejismo de la estadidad</h3>
+          <p>Hay una razón final por la que el sueño de la unión nunca despertará, y no tiene nada que ver con lo que quieren los puertorriqueños. La estadidad no puede votarse desde la isla; solo puede concederla un acto del <strong>Congreso</strong>, un cuerpo en el que Puerto Rico no tiene un solo miembro con voto. Admitir a Puerto Rico como el estado cincuenta y uno significaría sentar a dos nuevos senadores, cuatro o cinco miembros de la Cámara y un nuevo bloque de votos electorales: suficiente para inclinar el equilibrio del poder nacional. El partido que tema perder esa contienda tiene todos los incentivos para que ese día nunca llegue.</p>
+          <p>La resistencia va más allá del partidismo, hasta la fría aritmética del interés propio. Un estado nuevo no suma poder: lo divide. La cuota de cada estado en el Senado se reduciría de una cincuentava parte a una cincuenta y unava. La Cámara está limitada a <strong>435 miembros</strong> desde 1929, así que los nuevos escaños de Puerto Rico se les quitarían a estados que ya los tienen. La misma dilución se extendería al Colegio Electoral. En otras palabras, admitir a Puerto Rico les pide a cincuenta estados ya establecidos que voten para hacerse individualmente más débiles, y pocos en la historia se han ofrecido a hacerlo.</p>
+          <p>El expediente lo demuestra. Puerto Rico ha votado por la estadidad cuatro veces —2012, 2017, 2020 y 2024— y la respuesta de Washington ha sido el silencio. La Ley de Estatus de Puerto Rico fue aprobada por la Cámara en 2022 y murió en el Senado. No se admite un estado nuevo desde <strong>Hawái en 1959</strong>, hace más de sesenta y cinco años. La estadidad se sostiene en alto como un horizonte —siempre visible, nunca alcanzado—, un espejismo que mantiene a un pueblo colonizado caminando obediente hacia un destino que el mapa fue trazado para negarle. Un futuro que depende del permiso de quienes tienen todas las razones para negarlo no es un futuro: es una correa disfrazada de promesa.</p>
+
+          <h3>Solo la independencia</h3>
+          <p>De todas las opciones puestas ante los puertorriqueños, solo una los convierte en verdaderos dueños de su propio futuro, y esa es la independencia. La estadidad, por más que se vista con el lenguaje de la igualdad, sigue significando aceptar un futuro escrito en Washington. La libre asociación es soberanía con correa. Solo la independencia hace de Puerto Rico el autor de su propio destino.</p>
+          <p>Ser libre es ser responsable de uno mismo: controlar las propias fronteras, la propia moneda, el propio comercio, el propio asiento entre las naciones del mundo. Significa negociar con los Estados Unidos como un igual, en lugar de suplicarles como un dependiente. La independencia no es un salto al vacío; es la simple proposición de que los puertorriqueños, como cualquier otra nación de la tierra, son capaces de gobernarse a sí mismos y tienen derecho a hacerlo. La dignidad del autogobierno no es algo que se le pida a los Estados Unidos. <strong>Es algo que se reclama.</strong></p>
+        
+      </div>
+    </article>
+
+    <!-- ▼▼▼ AÑADE EL TEXTO COMPLETO DE NUEVAS EDITORIALES AQUÍ (otro <article class="reader-article" id="..."> con el mismo id que usaste arriba) ▼▼▼ -->
+
+  </div>
+</div>
 
 </body>
 </html>
