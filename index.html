@@ -483,6 +483,73 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── FEATURED EDITORIAL ── */
+    .featured-editorial {
+      background: linear-gradient(160deg, #0a1520 0%, #003D57 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+    .featured-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(244,196,48,0.25);
+      border-radius: 20px;
+      padding: clamp(2rem, 5vw, 3.5rem);
+    }
+    .featured-editorial .tag {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.25em;
+      font-size: 0.8rem;
+      color: var(--dark);
+      background: var(--sun);
+      padding: 0.35rem 1.1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .featured-editorial h2 { color: var(--white); margin-bottom: 1.2rem; }
+    .featured-editorial .dek {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--sand);
+      font-weight: 300;
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .featured-date {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: rgba(244,196,48,0.7);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── COMENTARIOS ── */
+    .comments-section { background: #0a1520; text-align: center; }
+    .comments-intro {
+      color: rgba(255,255,255,0.6);
+      max-width: 560px;
+      margin: 1rem auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .comments-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      min-height: 120px;
+      text-align: left;
+    }
+    .comments-placeholder {
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2rem;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -529,6 +596,17 @@
       <a href="#sobre" class="btn btn-primary">Explorar</a>
       <a href="#unete" class="btn btn-outline">Únete</a>
     </div>
+  </div>
+</section>
+
+<!-- FEATURED EDITORIAL -->
+<section class="featured-editorial reveal" id="editorial-destacada">
+  <div class="featured-inner">
+    <span class="tag">★ Editorial Destacada</span>
+    <p class="featured-date">EDITORIAL · 2026</p>
+    <h2>Consentimiento Fabricado</h2>
+    <p class="dek">Cuatro plebiscitos han favorecido la unión con Estados Unidos. Pero, ¿es una elección libre o el producto previsible de un siglo de dependencia colonial? Un análisis del costo real de la dependencia — y por qué solo la soberanía nos hace dueños de nuestro futuro.</p>
+    <button class="btn btn-primary" onclick="openEditorial('ed-consentimiento')">Leer editorial completa →</button>
   </div>
 </section>
 
@@ -747,6 +825,50 @@
       </div>
     </div>
 
+    <!-- EDITORIALES CARD — clickable with accordion -->
+    <div class="topic-card historia-card" onclick="toggleEditoriales()">
+      <div class="topic-icon">✍️</div>
+      <h3>Editoriales</h3>
+      <p>Opinión y análisis sobre el presente y el futuro político de Puerto Rico. Ideas para despertar el debate.</p>
+      <p class="expand-hint">▼ Haz clic para explorar editoriales</p>
+
+      <div class="historia-expand" id="editoriales-expand">
+
+        <!-- Editorial: Consentimiento Fabricado -->
+        <button class="historia-topic-btn" onclick="toggleHistoriaTopic(event, 'ed-consentimiento')">
+          Consentimiento Fabricado <span class="arrow">▶</span>
+        </button>
+        <div class="historia-content" id="ed-consentimiento">
+          <h4>Consentimiento Fabricado — Por Qué Solo la Independencia Nos Hace Libres</h4>
+          <p style="font-size:0.78rem; color:rgba(244,196,48,0.7); margin-bottom:1rem; letter-spacing:0.05em;">EDITORIAL · 2026</p>
+
+          <p>Durante más de un siglo, el destino político de Puerto Rico ha descansado sobre una sola pregunta incómoda: ¿elige de verdad su pueblo el vínculo con los Estados Unidos, o ha sido condicionado a desearlo? En cuatro plebiscitos consecutivos —2012, 2017, 2020 y de nuevo en 2024, cuando la estadidad alcanzó cerca del <strong>58.6 por ciento</strong> de los votos— los puertorriqueños han señalado una clara preferencia por estrechar los lazos con Washington antes que por la independencia. Para muchos, esto parece un veredicto democrático ya resuelto. Pero una mirada más detenida sugiere que lo que parece una elección libre podría ser, en realidad, el producto previsible de la dependencia colonial.</p>
+          <p>El primer problema es de información. Una elección genuina exige que todas las opciones se comprendan en igualdad de condiciones, y no es así. Generaciones de puertorriqueños han sido educadas, gobernadas y organizadas económicamente bajo la autoridad estadounidense, mientras que la independencia se ha presentado —cuando se presenta— como un salto hacia la pobreza y el aislamiento. Los votantes pueden imaginar con nitidez la vida como parte de los Estados Unidos porque ya viven una versión de ella; no pueden imaginar un Puerto Rico soberano porque ninguna generación viva lo ha experimentado.</p>
+          <p>El segundo problema es la coacción económica, que se disfraza de preferencia. La economía de la isla fue estructurada deliberadamente en torno a la dependencia de las transferencias federales, los mercados estadounidenses y leyes como la <strong>Ley Jones</strong>. Nadie elige libremente la mano que lo alimenta cuando esa misma mano ha pasado un siglo asegurándose de que no pudiera alimentarse de ninguna otra forma. Lo que parece lealtad suele ser apenas el miedo racional a perder beneficios que fueron hechos indispensables a propósito.</p>
+          <p>El tercer problema es la colonización de la identidad misma. La forma más duradera de control imperial no es militar ni económica, sino psicológica: el momento en que el colonizado empieza a ver la condición del colonizador como el techo natural de su propia ambición. Cuando la estadidad se presenta como el único camino hacia la dignidad, la suposición tácita es que esa dignidad solo puede ser otorgada por los Estados Unidos, nunca reclamada por los propios puertorriqueños.</p>
+          <p>Nada de esto es una acusación de estupidez. Los puertorriqueños no son ignorantes; responden con lógica a las condiciones que se les impusieron. El punto es que esas condiciones nunca fueron neutrales.</p>
+
+          <h4>El balance económico</h4>
+          <p>Quienes defienden el arreglo actual reducen todo el debate a una sola cifra: el dinero federal. Y la cifra es real. Para el año fiscal 2026, el presupuesto consolidado de Puerto Rico ronda los <strong>$32.6 mil millones</strong>, de los cuales solo unos <strong>$13 mil millones</strong> corresponden al Fondo General de control local. En el año fiscal 2025, los fondos federales alcanzaron unos <strong>$15.4 mil millones</strong>, cerca del <strong>46 por ciento</strong> del presupuesto del gobierno. Esta es la cifra que se agita como bandera de advertencia: si pierdes la unión, pierdes el dinero.</p>
+          <p>Pero un balance tiene dos columnas, y la de los costos casi nunca se suma. La Ley Jones obliga a la isla a transportar mercancías únicamente en barcos construidos, tripulados y abanderados en los Estados Unidos. Economistas de la Universidad de Purdue estiman que impone una carga de cerca de <strong>$1.4 mil millones</strong> cada año —el equivalente a un arancel del <strong>30.6 por ciento</strong> sobre los bienes que llegan del territorio continental—, de los cuales unos $692 millones recaen directamente sobre los hogares, alrededor de $203 por persona al año. En una isla que importa cerca del <strong>85 por ciento</strong> de sus alimentos y casi toda su energía, ese impuesto oculto produce un costo de vida cerca de un 13 por ciento más alto que el del territorio continental, mientras el ingreso medio de los hogares (unos $24,000) apenas llega a la mitad de la cifra continental. Más del <strong>40 por ciento</strong> vive bajo el nivel de pobreza, y la isla carga con una deuda que supera los <strong>$70 mil millones</strong>, reestructurada bajo una junta de supervisión que los puertorriqueños no eligieron.</p>
+          <p>Imaginemos ahora la otra columna: un Puerto Rico soberano que comercie con el mundo en sus propios términos. Libre de la Ley Jones, la isla podría enviar y recibir mercancías en los barcos más económicos disponibles, como ya lo hacen sus vecinos del Caribe. Fijaría su propio régimen arancelario, negociaría sus propios acuerdos comerciales con la Unión Europea, América Latina y Asia, y controlaría su propia política tributaria —la misma herramienta que la República Dominicana, Singapur e Irlanda usaron para atraer capital global— en vez de dejar que Washington decida qué incentivos pueden ofrecer sus industrias.</p>
+          <p>La honestidad obliga a nombrar la parte difícil: un Puerto Rico soberano perdería buena parte de esos $15.4 mil millones en transferencias directas, y reemplazarlos exigiría una construcción nacional disciplinada. Pero la independencia no tiene por qué significar abandono: el modelo de libre asociación —la relación de EE.UU. con las Islas Marshall, Micronesia y Palaos— permite que naciones soberanas reciban asistencia mientras controlan sus propios asuntos. Un presupuesto que depende de un benefactor no es ingreso, es una mesada, y una mesada puede ser revocada a voluntad por un Congreso que responde a otros pueblos.</p>
+
+          <h4>El espejismo de la estadidad</h4>
+          <p>Hay una razón final por la que el sueño de la unión nunca despertará, y no tiene nada que ver con lo que quieren los puertorriqueños. La estadidad no puede votarse desde la isla; solo puede concederla un acto del <strong>Congreso</strong>, un cuerpo en el que Puerto Rico no tiene un solo miembro con voto. Admitir a Puerto Rico como el estado cincuenta y uno significaría sentar a dos nuevos senadores, cuatro o cinco miembros de la Cámara y un nuevo bloque de votos electorales: suficiente para inclinar el equilibrio del poder nacional. El partido que tema perder esa contienda tiene todos los incentivos para que ese día nunca llegue.</p>
+          <p>La resistencia va más allá del partidismo, hasta la fría aritmética del interés propio. Un estado nuevo no suma poder: lo divide. La cuota de cada estado en el Senado se reduciría de una cincuentava parte a una cincuenta y unava. La Cámara está limitada a <strong>435 miembros</strong> desde 1929, así que los nuevos escaños de Puerto Rico se les quitarían a estados que ya los tienen. La misma dilución se extendería al Colegio Electoral. En otras palabras, admitir a Puerto Rico les pide a cincuenta estados ya establecidos que voten para hacerse individualmente más débiles, y pocos en la historia se han ofrecido a hacerlo.</p>
+          <p>El expediente lo demuestra. Puerto Rico ha votado por la estadidad cuatro veces —2012, 2017, 2020 y 2024— y la respuesta de Washington ha sido el silencio. La Ley de Estatus de Puerto Rico fue aprobada por la Cámara en 2022 y murió en el Senado. No se admite un estado nuevo desde <strong>Hawái en 1959</strong>, hace más de sesenta y cinco años. La estadidad se sostiene en alto como un horizonte —siempre visible, nunca alcanzado—, un espejismo que mantiene a un pueblo colonizado caminando obediente hacia un destino que el mapa fue trazado para negarle. Un futuro que depende del permiso de quienes tienen todas las razones para negarlo no es un futuro: es una correa disfrazada de promesa.</p>
+
+          <h4>Solo la independencia</h4>
+          <p>De todas las opciones puestas ante los puertorriqueños, solo una los convierte en verdaderos dueños de su propio futuro, y esa es la independencia. La estadidad, por más que se vista con el lenguaje de la igualdad, sigue significando aceptar un futuro escrito en Washington. La libre asociación es soberanía con correa. Solo la independencia hace de Puerto Rico el autor de su propio destino.</p>
+          <p>Ser libre es ser responsable de uno mismo: controlar las propias fronteras, la propia moneda, el propio comercio, el propio asiento entre las naciones del mundo. Significa negociar con los Estados Unidos como un igual, en lugar de suplicarles como un dependiente. La independencia no es un salto al vacío; es la simple proposición de que los puertorriqueños, como cualquier otra nación de la tierra, son capaces de gobernarse a sí mismos y tienen derecho a hacerlo. La dignidad del autogobierno no es algo que se le pida a los Estados Unidos. <strong>Es algo que se reclama.</strong></p>
+        </div>
+
+        <!-- Add more Editoriales topics here in the future -->
+
+      </div>
+    </div>
+
     <div class="topic-card">
       <div class="topic-icon">🍽️</div>
       <h3>Gastronomía</h3>
@@ -789,6 +911,26 @@
   </div>
 </section>
 
+<!-- COMENTARIOS -->
+<section class="comments-section reveal" id="comentarios">
+  <p class="section-label">Conversación</p>
+  <h2 style="color:var(--white);">Comentarios</h2>
+  <p class="comments-intro">Comparte tu opinión sobre nuestros editoriales. Todos los comentarios son revisados y aprobados antes de publicarse.</p>
+
+  <div class="comments-wrap">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PEGA AQUÍ EL CÓDIGO DE TU SERVICIO DE COMENTARIOS.
+         Crea una cuenta gratis (Common Ninja, POWR o Disqus),
+         ACTIVA la opción "aprobar antes de publicar" / "pre-moderación",
+         copia el código que te dan y reemplaza el párrafo de abajo.
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <p class="comments-placeholder">La sección de comentarios aparecerá aquí una vez conectes el servicio.</p>
+
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section reveal" id="unete">
   <p class="section-label">Únete al movimiento</p>
@@ -812,6 +954,25 @@
   function toggleResistencia() {
     const expand = document.getElementById('resistencia-expand');
     expand.classList.toggle('open');
+  }
+
+  // Toggle Editoriales topic list
+  function toggleEditoriales() {
+    const expand = document.getElementById('editoriales-expand');
+    expand.classList.toggle('open');
+  }
+
+  // Open a specific editorial from the featured section at the top
+  function openEditorial(id) {
+    const list = document.getElementById('editoriales-expand');
+    if (list) list.classList.add('open');
+    const content = document.getElementById(id);
+    if (content) {
+      content.classList.add('open');
+      const btn = content.previousElementSibling;
+      if (btn && btn.classList.contains('historia-topic-btn')) btn.classList.add('active');
+      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // Toggle Música topic list
